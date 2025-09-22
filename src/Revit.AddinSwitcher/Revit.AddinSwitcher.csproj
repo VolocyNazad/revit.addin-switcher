@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoConstructor" Version="5.6.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Shared.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Shared.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\ViewModels\ActivateAddinsViewModel.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ActivateAddinsViewModel.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\ViewModels\MainWindowViewModel.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>MainWindowViewModel.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\ViewModels\RefreshAddinPathContainerViewModel.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>RefreshAddinPathContainerViewModel.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\ViewModels\SharedResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>SharedResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Shared.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Shared.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ViewModels\ActivateAddinsViewModel.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>ActivateAddinsViewModel.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ViewModels\MainWindowViewModel.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>MainWindowViewModel.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ViewModels\RefreshAddinPathContainerViewModel.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>RefreshAddinPathContainerViewModel.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\ViewModels\SharedResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>SharedResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Abstractions\Models\" />
+	</ItemGroup>
+
+</Project>
