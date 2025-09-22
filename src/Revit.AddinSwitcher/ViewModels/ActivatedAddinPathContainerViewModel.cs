@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.Logging;
 using Revit.AddinSwitcher.Abstractions.ViewModels;
 using Revit.AddinSwitcher.Infrastructure;
 using Revit.AddinSwitcher.ViewModels.Base;
@@ -17,6 +18,9 @@ internal sealed partial class ActivatedAddinPathContainerViewModel : Initializab
     [AutoConstructorInitializer]
     private void OnInitialing() => RefreshCollectionView();
 
+    [ObservableProperty]
+    private string _searchField;
+
     public ObservableCollection<AddinInfoViewModel> SelectedItems
         => CollectionViewSource is not null
         ? ((ObservableCollection<SelectableViewModel<AddinInfoViewModel>>)CollectionViewSource.Source)
@@ -28,11 +32,24 @@ internal sealed partial class ActivatedAddinPathContainerViewModel : Initializab
 
     public CollectionViewSource? CollectionViewSource { get; private set; }
 
-    protected override void OnInitializing() 
-        => _ownerContainer.PropertyChanged += AddinPathContainerViewModel_PropertyChanged;
-    protected override void OnDeinitializing()
-        => _ownerContainer.PropertyChanged -= AddinPathContainerViewModel_PropertyChanged;
+    protected override void OnInitializing()
+    {
+        _ownerContainer.PropertyChanged += AddinPathContainerViewModel_PropertyChanged;
+        PropertyChanged += ActivatedAddinPathContainerViewModel_PropertyChanged;
+    }
 
+
+    protected override void OnDeinitializing()
+    {
+        _ownerContainer.PropertyChanged -= AddinPathContainerViewModel_PropertyChanged;
+        PropertyChanged -= ActivatedAddinPathContainerViewModel_PropertyChanged;
+    }
+
+    private void ActivatedAddinPathContainerViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(SearchField))
+            RefreshCollectionView();
+    }
     private void AddinPathContainerViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs args)
     {
         if (args.PropertyName == nameof(_ownerContainer.Collection)) RefreshCollectionView();
@@ -63,7 +80,7 @@ internal sealed partial class ActivatedAddinPathContainerViewModel : Initializab
     private void CollectionViewSource_Filter(object sender, FilterEventArgs args)
     {
         args.Accepted = args.Item is SelectableViewModel<AddinInfoViewModel> viewModel
-            && viewModel.Item is not null && IsTarget(viewModel.Item);
+            && viewModel.Item is not null && IsTarget(viewModel.Item) && viewModel.Item.Path.Contains(SearchField ?? string.Empty);
     }
     private static bool IsTarget(AddinInfoViewModel item) => item.IsActive is true;
 }

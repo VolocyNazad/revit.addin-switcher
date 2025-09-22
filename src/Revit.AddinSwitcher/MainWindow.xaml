@@ -91,7 +91,8 @@
                     <TextBox
                         Grid.Column="1"
                         materialDesign:HintAssist.Hint="Поиск"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding SearchField}" />
 
                     <Button
                         Grid.Column="2"
@@ -152,7 +153,8 @@
                     <TextBox
                         Grid.Column="1"
                         materialDesign:HintAssist.Hint="Поиск"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding SearchField}" />
 
                     <Button
                         Grid.Column="2"
