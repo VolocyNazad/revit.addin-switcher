@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Revit.AddinSwitcher.Abstractions.ViewModels;
 using Revit.AddinSwitcher.Infrastructure;
 using Revit.AddinSwitcher.ViewModels.Base;
