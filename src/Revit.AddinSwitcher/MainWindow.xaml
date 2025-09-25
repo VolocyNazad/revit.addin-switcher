@@ -64,6 +64,12 @@
 
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModels:AddinInfoVersionFilterViewModel}">
+
+            <TextBlock Text="{Binding Value}" />
+
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewModels:ActivatedAddinPathContainerViewModel}">
 
             <Grid>
@@ -75,6 +81,7 @@
                 </interaction:Interaction.Triggers>
 
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -110,6 +117,20 @@
 
                 <ListBox
                     Grid.Row="1"
+                    DataContext="{Binding Filters}"
+                    ItemsSource="{Binding}"
+                    Style="{StaticResource MaterialDesignFilterChipSecondaryListBox}">
+
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignFilterChipSecondaryListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsActive, Mode=TwoWay}" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                </ListBox>
+
+                <ListBox
+                    Grid.Row="2"
                     ItemsSource="{Binding CollectionViewSource.View}"
                     SelectionMode="Multiple">
 
@@ -138,6 +159,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -172,6 +194,20 @@
 
                 <ListBox
                     Grid.Row="1"
+                    DataContext="{Binding Filters}"
+                    ItemsSource="{Binding}"
+                    Style="{StaticResource MaterialDesignFilterChipSecondaryListBox}">
+
+                    <ListBox.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource MaterialDesignFilterChipSecondaryListBoxItem}" TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="IsSelected" Value="{Binding IsActive, Mode=TwoWay}" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                </ListBox>
+
+                <ListBox
+                    Grid.Row="2"
                     ItemsSource="{Binding CollectionViewSource.View}"
                     SelectionMode="Multiple">
 
