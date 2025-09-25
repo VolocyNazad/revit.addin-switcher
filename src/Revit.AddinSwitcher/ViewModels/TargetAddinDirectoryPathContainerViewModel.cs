@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Extensions.Logging;
 using Revit.AddinSwitcher.Abstractions.ViewModels;
+using Revit.AddinSwitcher.Infrastructure;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -23,11 +24,18 @@ internal sealed partial class TargetAddinDirectoryPathContainerViewModel : Initi
     private readonly string _commonAppPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
 
     [AutoConstructorInitializer]
-    private void OnInitialing() => Collection = [
-            new(Path.Combine(_appPath, @$"Autodesk\Revit\Addins\2021")),
-            new(Path.Combine(_commonAppPath, @$"Autodesk\Revit\Addins\2021"))
-        ];
+    private void OnInitialing()
+    {
+        IEnumerable<string> addinDirectoryPaths = [
+                Path.Combine(_appPath, @$"Autodesk\Revit\Addins\"),
+                Path.Combine(_commonAppPath, @$"Autodesk\Revit\Addins\")
+            ];
+        IEnumerable<DirectoryInfoViewModel> collection = addinDirectoryPaths
+            .SelectMany(Directory.GetDirectories)
+            .Select(directoryPath => new DirectoryInfoViewModel(directoryPath));
 
+        Collection = collection.ToObservable();
+    }
 
     [ObservableProperty]
     private ObservableCollection<DirectoryInfoViewModel> _collection = [];
