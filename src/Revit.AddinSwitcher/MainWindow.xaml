@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:Revit.AddinSwitcher.ViewModels"
     Title="{Binding Localizer[mainwindow_title]}"
-    Width="900"
+    Width="910"
     Height="700"
     DataContext="{Binding MainWindow, Source={StaticResource Locator}}"
     ToolTip="{Binding Localizer[mainwindow_tooltip]}"
