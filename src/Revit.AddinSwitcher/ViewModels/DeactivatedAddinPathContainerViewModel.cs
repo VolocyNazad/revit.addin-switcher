@@ -4,7 +4,6 @@ using Revit.AddinSwitcher.Abstractions.ViewModels;
 using Revit.AddinSwitcher.Infrastructure;
 using Revit.AddinSwitcher.ViewModels.Base;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 

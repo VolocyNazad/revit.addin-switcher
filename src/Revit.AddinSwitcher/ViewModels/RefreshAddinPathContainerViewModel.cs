@@ -94,7 +94,6 @@ internal sealed partial class RefreshAddinPathContainerViewModel : Initializable
         => _debounceDispatcher.Debounce(2000, args => RefreshInfoAboutAddins(), args);
     private void OnError(object sender, ErrorEventArgs args)
         => _debounceDispatcher.Debounce(2000, args => RefreshInfoAboutAddins(), args);
-
     private void RefreshInfoAboutAddins()
     {
         IEnumerable<string> directories = _directoryContainer.Collection
